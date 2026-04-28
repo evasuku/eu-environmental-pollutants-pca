@@ -10,4 +10,6 @@ This is a Principal Component Analysis (PCA) project on a Eurostat dataset conta
 #### Analysis Goal:
 The purpose of this analysis was to reduce the dimensionality of the dataset using Principal Component Analysis. 
 
+For more information on the results please check out the pptx file on this repository. 
+
 *Please note that the initial language of this project was in Greek. I have done my best to translate the contents to english so it's more accessible to everyone.*
