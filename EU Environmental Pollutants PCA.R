@@ -1,6 +1,5 @@
 
 library("readxl")
-# διαβάζω xlsx αρχεία
 environment <- read_excel("environment.xlsx")  ### διαβάζω το αρχείο που είναι σε excel
 
 library("FactoMineR")
@@ -14,13 +13,13 @@ length(environment$Population)
 
 data.frame(environment)
 
-# έλεγχος μεταβλητών
+# variables
 is.numeric(environment$Population)
 is.na(environment$Population)
 is.null(environment$Population)
 ## true / false
 is.logical(environment$Population)
-## έλεγχος NRG_consumption
+## NRG_consumption
 is.numeric(environment$NRG_consumption)
 is.na(environment$NRG_consumption)
 is.null(environment$NRG_consumption)
@@ -29,34 +28,30 @@ is.null(environment$NRG_consumption)
 is.logical(environment$NRG_consumption)
 
 
-## αρχικά
-# επιλέγω 23 αθλητές (από τους 27) και 10 στήλες που αντιστοιχούν στα 10 αγωνίσματα
 environment2 <- environment[2:8]
 
 # head(environment2)
 head(environment2,n=28)
 
 
-# πίνακας διακυμάνσεων
+# covariance matrix
 cov(environment2)
 
-# πίνακας συσχετίσεων
+# correlation matrix
 cor(environment2)
 
-## βλέπω τι προκύπτει από την PCA 
-## θα χρησιμοποιήσω αργότερα κάποια στοιχεία από το res.pca, όπως το cos2
+## pca results
 res.pca <- PCA(environment2, graph = FALSE)
 print(res.pca)
 
 eig.val <- get_eigenvalue(res.pca)
 eig.val
 
-## γραφήματα κύριες συνιστώσες
 ## scree plot
 fviz_eig(res.pca, addlabels = TRUE, ylim = c(0, 40))
 
 ## From the plot above, we might want to stop at the fifth principal component 
-## 87% of the information (variances) contained in the data 
+## 99.7% of the information (variances) contained in the data 
 ## are retained by the first five principal components
 
 res.pca <- prcomp(environment2, scale = TRUE)
@@ -64,11 +59,9 @@ res.pca <- prcomp(environment2, scale = TRUE)
 
 ## scree plot
 fviz_eig(res.pca)
-## τι χρειάζομα περισότερο
 var <- get_pca_var(res.pca)
 var
 
-## χρειάζομαι τον δείκτη cos2
 ## The quality of representation of the variables on factor map is called cos2 
 ## (square cosine, squared coordinates)
 var$cos2
@@ -76,7 +69,7 @@ var$contrib
 var$coord
 ## The larger the value of the contribution, the more the variable contributes to the component
 
-## έχουμε μια αρχική εικόνα
+## initial look
 fviz_pca_var(res.pca, col.var = "black")
 
 ## Positively correlated variables are grouped together.
@@ -96,7 +89,6 @@ fviz_cos2(res.pca, choice = "var", axes = 1:2)
 ## A low cos2 indicates that the variable is not perfectly represented by the PCs
 ## In this case the variable is close to the center of the circle
 
-## επίσης
 ## The cos2 values are used to estimate the quality of the representation
 ## The closer a variable is to the circle of correlations, 
 ## the better its representation on the factor map 
@@ -111,7 +103,7 @@ fviz_contrib(res.pca, choice = "var", axes = 2, top = 10)
 ## C1 and C2 are the contributions of the variable on PC1 and PC2, respectively
 ## Eig1 and Eig2 are the eigenvalues of PC1 and PC2, respectively
 ## Recall that eigenvalues measure the amount of variation retained by each PC
-## Ειδικότερα, It can be seen that the variables - X100m, Long.jump and Pole.vault 
+## Specifically, It can be seen that the variables NRG_consumption, Population, Real_GDP_PC, GDP_K 
 ## contribute the most to the dimensions 1 and 2
 
 fviz_pca_var(res.pca,
