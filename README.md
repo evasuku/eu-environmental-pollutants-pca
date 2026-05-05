@@ -11,7 +11,7 @@ This is a Principal Component Analysis (PCA) project on a Eurostat dataset conta
 #### Analysis Goal:
 The purpose of this analysis was to reduce the dimensionality of the dataset using Principal Component Analysis. 
 
-- Using Scree Plot we can reduce the dimensions to 5 and retain 99.7% of the original variance.
+- According to this Scree Plot we can reduce the dimensions to 5 and still retain 99.7% of the original variance.
 <img width="1734" height="933" alt="image" src="https://github.com/user-attachments/assets/832a30f2-7290-40f2-954e-8d6c46ed9678" />
 
 For more information on the results please check out the pptx file on this repository. 
